@@ -19,22 +19,6 @@
     </tr>
     </thead>
 
-  <%--  // simple java realization
-    <%
-        for (User user : (List<User>) request.getAttribute("userList")) {
-        %>
-        <tr>
-            <td><%=user.getName()%></td>
-            <td><%=user.getLastname()%></td>
-            <td><%=user.getCity()%></td>
-            <td><%=user.getEmail()%></td>
-            <td></td>
-        </tr>
-        <%
-        }
-    %>--%>
-
-    <%-- jstl realization - без костылей :)--%>
     <c:forEach items="${userList}" var="user">
         <tr>
             <jsp:useBean id="user" class="org.itstep.myWebApp.model.User"/>
