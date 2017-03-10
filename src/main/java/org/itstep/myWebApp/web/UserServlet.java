@@ -2,6 +2,7 @@ package org.itstep.myWebApp.web;
 
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.service.UserService;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
