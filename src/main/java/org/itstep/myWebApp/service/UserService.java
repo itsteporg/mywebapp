@@ -27,9 +27,8 @@ public class UserService {
         return repository.save(user);
     }
 
-    public void update(User user, Integer id) {
-        ExceptionUtil.check(repository.getById(id), id);
-        user.setId(id);
+    public void update(User user) {
+        ExceptionUtil.check(repository.getById(user.getId()), user.getId());
         repository.save(user);
     }
 

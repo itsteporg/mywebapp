@@ -12,4 +12,10 @@ public class ExceptionUtil {
         return entity;
     }
 
+    public static void check(boolean b, Integer id) {
+        if (!b) {
+            throw new NotFoundException("Not found entity with id = " + id);
+        }
+    }
+
 }
