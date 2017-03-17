@@ -1,14 +1,17 @@
 package org.itstep.myWebApp.model;
 
+import org.hibernate.validator.constraints.Email;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.NotNull;
 
 public class User extends Entity {
 
     private String lastname;
 
+    @NotNull(message = "city can not be null")
     private String city;
 
+    @Email
     private String email;
 
     public User() {

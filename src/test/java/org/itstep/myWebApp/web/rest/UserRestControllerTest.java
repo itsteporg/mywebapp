@@ -10,9 +10,11 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Arrays;
 
+import static org.itstep.myWebApp.UserTestData.MAIL_1;
 import static org.itstep.myWebApp.UserTestData.USER_1;
 import static org.itstep.myWebApp.UserTestData.USER_2;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -42,6 +44,17 @@ public class UserRestControllerTest extends WebTest{
         User user = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
 
         Assert.assertEquals(USER_1, user);
+    }
+
+    @Test
+    public void create() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(post("/rest/users")
+                .content(objectMapper.writeValueAsString(MAIL_1))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andDo(print())
+                .andReturn();
     }
 
     @Test
