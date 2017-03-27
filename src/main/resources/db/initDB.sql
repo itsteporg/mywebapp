@@ -10,4 +10,4 @@ CREATE TABLE users
 );
 
 INSERT INTO users VALUES (NULL, 'nick', 'dalas', 'dnipro', 'user@gmail.com');
-INSERT INTO users VALUES (NULL, 'angela', 'hike', 'KYIV', 'ang@yahoo.com');
+INSERT INTO users VALUES (NULL, 'angela', 'hike', 'kyiv', 'ang@yahoo.com');

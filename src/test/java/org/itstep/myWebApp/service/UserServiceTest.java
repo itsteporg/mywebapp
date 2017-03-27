@@ -27,6 +27,7 @@ public class UserServiceTest {
     public void getAll() throws Exception {
         List<User> users = service.getAll();
         Assert.assertEquals(2, users.size());
+        Assert.assertArrayEquals(new User[]{UserTestData.USER_1, UserTestData.USER_2}, users.toArray());
     }
 
     @Test
