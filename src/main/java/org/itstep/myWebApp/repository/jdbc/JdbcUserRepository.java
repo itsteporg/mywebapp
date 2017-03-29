@@ -3,6 +3,7 @@ package org.itstep.myWebApp.repository.jdbc;
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -42,37 +43,45 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public boolean delete(Integer id) {
-        return jdbcTemplate.update("DELETE FROM users WHERE users.id=?", id) > 0;
+        try {
+            return jdbcTemplate.update("DELETE FROM users WHERE users.id=?", id) > 0;
+        }catch (EmptyResultDataAccessException e){
+            return false;
+        }
     }
 
     @Override
     public User save(User user) {
+    System.out.println(user);
 
-        System.out.println(user);
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("name", user.getName());
+    map.addValue("lastname", user.getLastname());
+    map.addValue("city", user.getCity());
+    map.addValue("email", user.getEmail());
 
-        MapSqlParameterSource map = new MapSqlParameterSource();
-        map.addValue("name", user.getName());
-        map.addValue("lastname", user.getLastname());
-        map.addValue("city", user.getCity());
-        map.addValue("email", user.getEmail());
+    if (user.getId() == null) {
+        Number number = insert.executeAndReturnKey(map);
+        user.setId(number.intValue());
+    } else {
+        map.addValue("id", user.getId());
+        namedParameterJdbcTemplate
+                .update("UPDATE users SET name=:name, lastname=:lastname, city=:city, email=:email " +
+                        "WHERE id=:id", map);
+    }
 
-        if (user.getId() == null) {
-            Number number = insert.executeAndReturnKey(map);
-            user.setId(number.intValue());
-        } else {
-            map.addValue("id", user.getId());
-            namedParameterJdbcTemplate
-                    .update("UPDATE users SET name=:name, lastname=:lastname, city=:city, email=:email " +
-                            "WHERE id=:id", map);
-        }
+    System.out.println(user);
 
-        System.out.println(user);
-
-        return user;
+    return user;
     }
 
     @Override
     public User getById(Integer id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM users WHERE users.id=?", rowMapper, id);
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM users WHERE users.id=?", rowMapper, id);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 }

@@ -14,10 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
+@ContextConfiguration({"classpath:spring/spring-app.xml",
+        "classpath:spring/spring-db.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/initDB.sql")
-public class UserServiceTest {
+public abstract class UserServiceTest {
 
     @Autowired
     private UserService service;
@@ -30,7 +30,6 @@ public class UserServiceTest {
     }
 
     @Test
-    @Transactional
     public void delete() throws Exception {
         service.delete(1);
         Assert.assertEquals(1, service.getAll().size());
@@ -42,7 +41,6 @@ public class UserServiceTest {
     }
 
     @Test
-    @Transactional
     public void save() throws Exception {
         User save = service.save(UserTestData.USER_4);
         UserTestData.USER_4.setId(3);

@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by student on 27.03.2017.
  */
 @Repository
+@Transactional
 public class DataJpaRepository implements UserRepository {
 
     @Autowired
@@ -24,7 +26,7 @@ public class DataJpaRepository implements UserRepository {
 
     @Override
     public boolean delete(Integer id) {
-        return repo.deleteById(id) > 0 ? true:false;
+            return repo.deleteById(id) > 0 ? true : false;
     }
 
     @Override
