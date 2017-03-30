@@ -4,9 +4,12 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "cf_users")
 @NamedQueries(@NamedQuery(name = User.GET_ALL, query = "SELECT u FROM User u"))
 public class User extends BaseEntity {
 
@@ -22,6 +25,10 @@ public class User extends BaseEntity {
     @Email
     @Column(name = "email", unique = true)
     private String email;
+
+
+    @OneToMany(targetEntity = Mail.class)
+    private Set<Mail> roles = new HashSet<Mail>();
 
     public User() {
     }

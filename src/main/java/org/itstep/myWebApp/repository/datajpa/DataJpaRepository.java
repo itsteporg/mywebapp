@@ -1,7 +1,10 @@
 package org.itstep.myWebApp.repository.datajpa;
 
+import org.itstep.myWebApp.model.Mail;
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,11 +19,15 @@ import java.util.List;
 @Transactional
 public class DataJpaRepository implements UserRepository {
 
+    Logger logger = LoggerFactory.getLogger(DataJpaRepository.class);
+
     @Autowired
     ProxyRepository repo;
 
     @Override
     public List getAll() {
+        logger.error("AZAZAZAZAZAZAZAA");
+        Mail mail;
         return repo.findAll();
     }
 

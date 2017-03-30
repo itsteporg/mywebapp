@@ -1,18 +1,32 @@
 package org.itstep.myWebApp.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "cf_mails")
 public class Mail extends BaseEntity {
 
+    @NotNull
+    @Column(name = "text")
     private String text;
 
+    @NotNull
+    @Column(name = "todudu")
     private String to; // email
 
+    @NotNull
+    @Column(name = "timestamp")
     private LocalDateTime created;
 
-    private Integer userId; // owner
+//    @NotNull
+//    @Column(name = "user_id")
+//    private Integer userId; // owner
+
+
 
     public Mail() {
     }
@@ -23,7 +37,6 @@ public class Mail extends BaseEntity {
         this.text = text;
         this.to = to;
         this.created = created;
-        this.userId = userId;
     }
 
     public String getText() {
@@ -50,13 +63,7 @@ public class Mail extends BaseEntity {
         this.created = created;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     @Override
     public String toString() {
@@ -64,7 +71,6 @@ public class Mail extends BaseEntity {
                 "text='" + text + '\'' +
                 ", to='" + to + '\'' +
                 ", created=" + created +
-                ", userId=" + userId +
                 "}";
     }
 }
