@@ -44,4 +44,8 @@ public class UserService {
     public User getById(Integer id) {
         return ExceptionUtil.check(repository.getById(id), id);
     }
+
+    @CacheEvict(value = "cache1", allEntries = true)
+    public void evictCache() {
+    }
 }
