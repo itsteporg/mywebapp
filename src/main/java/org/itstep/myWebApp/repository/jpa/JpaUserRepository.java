@@ -31,7 +31,7 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    @Transactional
+    @Transactional(value = Transactional.TxType.REQUIRED)
     public User save(User user) {
         if (user.getId() == null) {
             manager.persist(user);

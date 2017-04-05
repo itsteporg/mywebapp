@@ -24,8 +24,8 @@ public class User extends BaseEntity {
     @Column(name = "email", unique = true)
     private String email;
 
-    @OneToMany
-    private List<Mail> mails;
+//    @OneToMany
+//    private List<Mail> mails;
 
     public User() {
     }
