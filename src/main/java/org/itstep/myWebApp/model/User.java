@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+@Entity//(name = "cf_users")
 @Table(name = "cf_users")
 @NamedQueries(@NamedQuery(name = User.GET_ALL, query = "SELECT u FROM User u"))
 public class User extends BaseEntity {
@@ -27,8 +27,9 @@ public class User extends BaseEntity {
     private String email;
 
 
-    @OneToMany(targetEntity = Mail.class)
-    private Set<Mail> roles = new HashSet<Mail>();
+
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+    private Set<Role> roles = new HashSet<Role>();
 
     public User() {
     }
