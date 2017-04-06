@@ -22,6 +22,7 @@ public class MockUserRepository implements UserRepository {
     }
 
     public List<User> getAll() {
+
         return new ArrayList<>(users.values());
     }
 
@@ -41,5 +42,10 @@ public class MockUserRepository implements UserRepository {
 
     public User getById(Integer id) {
         return users.get(id);
+    }
+
+    @Override
+    public User getByName(String name) {
+        return null;
     }
 }

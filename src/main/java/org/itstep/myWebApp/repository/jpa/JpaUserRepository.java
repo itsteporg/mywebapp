@@ -45,4 +45,9 @@ public class JpaUserRepository implements UserRepository {
     public User getById(Integer id) {
         return manager.find(User.class, id);
     }
+
+    @Override
+    public User getByName(String name) {
+        return null;
+    }
 }

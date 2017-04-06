@@ -40,4 +40,9 @@ public class DataJpaUserRepository implements UserRepository {
         logger.info("Get by id: {}", id);
         return repository.findOne(id);
     }
+
+    @Override
+    public User getByName(String name) {
+        return repository.getByName(name);
+    }
 }

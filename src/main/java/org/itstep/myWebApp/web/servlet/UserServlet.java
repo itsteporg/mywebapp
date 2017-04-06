@@ -1,6 +1,7 @@
 package org.itstep.myWebApp.web.servlet;
 
 import org.itstep.myWebApp.model.User;
+import org.itstep.myWebApp.service.IUserService;
 import org.itstep.myWebApp.service.UserService;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class UserServlet extends HttpServlet {
 
-    private UserService service;
+    private IUserService service;
 
     @Override
     public void init(ServletConfig config) throws ServletException {

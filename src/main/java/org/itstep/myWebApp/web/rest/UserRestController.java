@@ -1,6 +1,7 @@
 package org.itstep.myWebApp.web.rest;
 
 import org.itstep.myWebApp.model.User;
+import org.itstep.myWebApp.service.IUserService;
 import org.itstep.myWebApp.service.UserService;
 import org.itstep.myWebApp.util.ErrorInfo;
 import org.itstep.myWebApp.util.NotFoundException;
@@ -20,7 +21,7 @@ import java.util.List;
 public class UserRestController {
 
     @Autowired
-    private UserService service;
+    private IUserService service;
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)

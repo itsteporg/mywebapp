@@ -37,7 +37,7 @@ public class User extends BaseEntity {
     private String password;
 
     @Column(name = "enabled", nullable = false)
-    protected boolean enabled = true;
+    private boolean enabled = true;
 
 //    @OneToMany
 //    private List<Mail> mails;
@@ -116,5 +116,17 @@ public class User extends BaseEntity {
                 ", email='" + email + '\'' +
                 ", roles=" + roles +
                 "} " + super.toString();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 }

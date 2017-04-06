@@ -7,21 +7,20 @@
 						http://www.springframework.org/schema/security
 						http://www.springframework.org/schema/security/spring-security.xsd">
 
-
-    <http pattern="/rest/**" auto-config="true" use-expressions="true" create-session="never">
-        <intercept-url pattern="/*" access="hasRole('ROLE_ADMIN')"/>
-    </http>
-
-    <http pattern="/users" auto-config="true" use-expressions="true">
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/rest/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="SELECT u.name, u.password, u.enabled FROM users u WHERE u.name=?"
-                               authorities-by-username-query="SELECT u.name, r.role FROM users u, user_roles r WHERE u.name=?"
-            />
+        <authentication-provider user-service-ref="userService">
+
+            <!--<jdbc-user-service data-source-ref="dataSource"-->
+                               <!--users-by-username-query="SELECT u.name, u.password, u.enabled FROM users u WHERE u.name=?"-->
+                               <!--authorities-by-username-query="SELECT u.name, r.role FROM users u, user_roles r WHERE u.name=?"-->
+            <!--/>-->
+
             <!--<user-service>-->
                 <!--<user name="angela" password="12345" authorities="ROLE_USER"/>-->
                 <!--<user name="nick" password="67890" authorities="ROLE_ADMIN"/>-->

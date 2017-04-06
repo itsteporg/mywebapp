@@ -17,7 +17,7 @@ public interface MyUserRepository extends JpaRepository<User, Integer> {
     @Transactional
     int deleteById(/*@Param("id")*/ Integer id);
 
-    User getByEmail(String email);
+    User getByName(String name);
 
     @Override
     @Transactional
@@ -25,4 +25,6 @@ public interface MyUserRepository extends JpaRepository<User, Integer> {
 
     @Override
     User findOne(Integer integer);
+
+
 }

@@ -1,6 +1,7 @@
 package org.itstep.myWebApp.web.ui;
 
 import org.itstep.myWebApp.model.User;
+import org.itstep.myWebApp.service.IUserService;
 import org.itstep.myWebApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private IUserService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getAll() {

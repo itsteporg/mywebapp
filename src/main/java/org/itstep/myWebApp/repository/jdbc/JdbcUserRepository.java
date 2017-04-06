@@ -77,4 +77,9 @@ public class JdbcUserRepository implements UserRepository {
             return null;
         }
     }
+
+    @Override
+    public User getByName(String name) {
+        return null;
+    }
 }
