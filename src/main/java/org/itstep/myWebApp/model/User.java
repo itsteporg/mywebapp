@@ -1,10 +1,12 @@
 package org.itstep.myWebApp.model;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -23,6 +25,19 @@ public class User extends BaseEntity {
     @Email
     @Column(name = "email", unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
+    @Column(name = "password", nullable = false)
+    @Length(min = 5)
+    private String password;
+
+    @Column(name = "enabled", nullable = false)
+    protected boolean enabled = true;
 
 //    @OneToMany
 //    private List<Mail> mails;
@@ -92,12 +107,14 @@ public class User extends BaseEntity {
         return result;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
                 "lastname='" + lastname + '\'' +
                 ", city='" + city + '\'' +
                 ", email='" + email + '\'' +
+                ", roles=" + roles +
                 "} " + super.toString();
     }
 }
